@@ -70,7 +70,10 @@ function SignInForm() {
             </div>
           {/* Login Button */}
             
-            <span  className="w-full bg-[#0C7489] text-white py-2 px-4 rounded-lg hover:bg-[#065a67] transition duration-300"  style={{ width: '560px', height: '55px', paddingLeft:'270px',paddingRight:'265px' }}>  <Link to="/src/pages/Verify.jsx">Continue</Link></span>
+            <span  className="w-full bg-[#0C7489] text-white py-2 px-4 rounded-lg hover:bg-[#065a67] transition duration-300" 
+             style={{ width: '560px', height: '55px', paddingLeft:'270px',paddingRight:'265px' }}>  
+             <Link to="/src/pages/Verify.jsx">Continue</Link>\
+             </span>
 
               
             
