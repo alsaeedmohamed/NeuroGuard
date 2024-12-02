@@ -17,7 +17,7 @@ function App() {
       <div  className="bg-[#f6fbfc] min-h-screen" >
         <Header />
         <main style={{ minHeight: "80vh" }}>
-          <Routes>
+          <Routes>n
             <Route path="/src/pages/SignInForm.jsx" element={<SignInForm />} />
             <Route path="/src/pages/SignUpForm.jsx" element={<SignUpForm />} />
             <Route path="/src/pages/Rest.jsx" element={<Rest/>} />
@@ -31,6 +31,6 @@ function App() {
     </Router>
   );
 }
-// good
+
 export default App
 
