@@ -3,32 +3,48 @@ import React, { useState } from 'react';
 import signup from '../images/signup.svg';
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function SignUpForm() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
-  const [phone, setPhone] = useState(''); // State for phone number
+  const [phone, setPhone] = useState(''); 
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
 
-    // Regex للتحقق من صحة الإيميل
+    //  email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(value)) {
-      setEmailError(true); // إظهار رسالة الخطأ
+      setEmailError(true);
     } else {
-      setEmailError(false); // إخفاء رسالة الخطأ
+      setEmailError(false);
     }
   };
-
   // eslint-disable-next-line no-unused-vars
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(`Email: ${email}, Phone: ${phone}`);
     alert("Form submitted successfully!");
   };
+  // Password validation
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(value)) {
+      setPasswordError(
+        'Password must be at least 8 characters, include uppercase, lowercase, a number, and a special character.'
+      );
+    } else {
+      setPasswordError('');
+    }
+  };
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Section - Image */}
@@ -107,16 +123,35 @@ function SignUpForm() {
             </div>
 
             {/* Password */}
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <label className="block font-medium text-gray-600 text-left">
                 Password<span className="text-[#FF4D4F]">*</span>
               </label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0C7489] text-gray-700"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}    
+                  value={password}
+                  onChange={handlePasswordChange}
+                  placeholder="Enter your password"
+                  className={`w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 ${
+                    passwordError
+                      ? 'border-[#FF4D4F] focus:ring-[#FF4D4F]'
+                      : 'border-gray-300 focus:ring-[#0C7489]'
+                  }`}
+                />
+                {/*  eye icon */}
+                <div
+                  className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEye className="text-gray-600"  /> :  <FaEyeSlash className="text-gray-600" />}
+                </div>
+              </div>
+              {passwordError && (
+                <p className="text-[#FF4D4F] text-sm mt-1">{passwordError}</p>
+              )}
             </div>
+
             {/* Date of Birth */}
             <div className="mb-4">
             <label className="block font-medium text-gray-600 text-left">
